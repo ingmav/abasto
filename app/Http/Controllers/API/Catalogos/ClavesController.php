@@ -49,7 +49,7 @@ class ClavesController extends Controller
             $parametros = $request->all();
             
 
-            DB::statement("CREATE TEMPORARY TABLE __cpm (id int AUTO_INCREMENT PRIMARY KEY, catalogo_fecha_cpm_id BIGiNT, gpo VARCHAR(20), clave INDEX VARCHAR(18), descripcion VARCHAR(250), cpm MEDIUMINT UNSIGNED)");
+            DB::statement("CREATE TEMPORARY TABLE __cpm (id int AUTO_INCREMENT PRIMARY KEY, catalogo_fecha_cpm_id BIGiNT, gpo VARCHAR(20), clave VARCHAR(18), descripcion VARCHAR(250), cpm MEDIUMINT UNSIGNED)");
             $origen = new fecha_cpm();
             $origen->fecha = Carbon::now();
             $origen->save();

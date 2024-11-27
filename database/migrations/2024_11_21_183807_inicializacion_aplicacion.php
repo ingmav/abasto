@@ -13,12 +13,12 @@ class InicializacionAplicacion extends Migration
      */
     public function up()
     {
-        /*Schema::create('almacen', function (Blueprint $table) {
+        Schema::create('almacen', function (Blueprint $table) {
             $table->id();
             $table->string('descripcion',100);
             $table->timestamps();
             $table->softDeletes();
-        });*/
+        });
 
         
        Schema::create('catalogo_fecha_cpm', function (Blueprint $table) {
@@ -31,8 +31,8 @@ class InicializacionAplicacion extends Migration
         Schema::create('catalogo_cpm', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('catalogo_fecha_cpm_id')->unsigned();
-            $table->string('gpo',20);
-            $table->string('clave',20);
+            $table->string('gpo',5);
+            $table->string('clave',18);
             $table->string('descripcion',250);
             $table->mediumInteger('cpm')->unsigned();
             $table->timestamps();
@@ -116,6 +116,6 @@ class InicializacionAplicacion extends Migration
         Schema::dropIfExists('inventario');
         Schema::dropIfExists('catalogo_cpm');
         Schema::dropIfExists('catalogo_fecha_cpm');
-        /*Schema::dropIfExists('almacen');*/
+        Schema::dropIfExists('almacen');
     }
 }

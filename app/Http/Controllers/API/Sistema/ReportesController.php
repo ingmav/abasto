@@ -29,6 +29,7 @@ class ReportesController extends Controller
                     ->select(
                         "catalogo_cpm.id",
                         "catalogo_cpm.clave", 
+                        "catalogo_cpm.descripcion", 
                         "catalogo_cpm.cpm", 
                         DB::RAW("IF(SUM(inventario_detalles.existencia) IS NULL,0,SUM(inventario_detalles.`existencia`)) AS existencia_inventario"),
                         DB::RAW(" IF(SUM(disposicion_detalles.existencia) IS NULL,0,SUM(disposicion_detalles.`existencia`)) AS existencia_disposicion")

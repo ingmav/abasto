@@ -62,7 +62,8 @@ class DisposicionController extends Controller
             $fecha = $parametros['fecha'];
             
             $datos = $parametros['data'];
-            DB::statement("CREATE TEMPORARY TABLE __disposicion (disposicion_id BIGINT UNSIGNED,clave VARCHAR(20), catalogo_cpm_id BIGINT UNSIGNED default(0), lote VARCHAR(250), caducidad DATE, financiamiento VARCHAR(250), existencia MEDIUMINT UNSIGNED)");
+            DB::statement("CREATE TEMPORARY TABLE __disposicion (disposicion_id BIGINT UNSIGNED,clave VARCHAR(18), catalogo_cpm_id BIGINT UNSIGNED default(0), lote VARCHAR(250), caducidad DATE, financiamiento VARCHAR(250), existencia MEDIUMINT UNSIGNED)");
+            DB::statement("CREATE INDEX claves ON __disposicion (clave)");
             $origen = new disposicion();
             $origen->fecha = Carbon::now();
             $origen->archivo = "prueba.xls";
@@ -73,11 +74,11 @@ class DisposicionController extends Controller
             $index = 0;
             
             for ($contador=0; $contador < count($datos); $contador++) { 
-
+                $caducidad = new carbon($datos[$contador]['CADUCIDAD']);
                 $registros[$index][$contador]['disposicion_id'] = $origen->id;
                 $registros[$index][$contador]['lote'] = $datos[$contador]['LOTE'];
                 $registros[$index][$contador]['clave'] = $datos[$contador]['CLAVE'];
-                $registros[$index][$contador]['caducidad'] = $datos[$contador]['CADUCIDAD'];
+                $registros[$index][$contador]['caducidad'] = $caducidad->format("Y-m-d");
                 $registros[$index][$contador]['financiamiento'] = $datos[$contador]['FINANCIAMIENTO'];
                 $registros[$index][$contador]['existencia'] = $datos[$contador]['EXISTENCIAS'];
                 $bandera++;
